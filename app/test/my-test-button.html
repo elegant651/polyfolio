@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>my-test-button</title>
+
+  <script src="../../bower_components/webcomponentsjs/webcomponents.min.js"></script>
+  <link rel="import" href="../../bower_components/polymer/polymer.html">
+  <script src="../../bower_components/web-component-tester/browser.js"></script>
+  <script src="../../bower_components/test-fixture/test-fixture-mocha.js"></script>
+  <script src="../../iron-test-helpers/mock-interactions.js"></script>
+
+  <link rel="import" href="../../bower_components/test-fixture/test-fixture.html">
+
+
+  <!-- Step 1: import the element to test -->
+  <link rel="import" href="../elements/my-greeting/test-button.html">
+
+</head>
+<body>
+
+  <test-fixture id="basic">
+    <template>
+      <test-button titled="BUTTON"></test-button>
+    </template>
+  </test-fixture>
+
+  <script>
+
+    suite('<test-button>', function() {
+      var button, header;
+
+      setup(function() {
+        button = fixture('basic');
+      });
+
+      test('Welcome, Welcome!', function() {
+        expect(button.getAttribute("titled")).to.be.eql('BUTTON');        
+      });
+
+      test('can be triggered with space', function(done) {
+        button.addEventListener('click', function() {
+          done();
+        });
+        MockInteractions.pressSpace(button);
+      });
+
+      test('can be triggered with enter', function(done) {
+        button.addEventListener('click', function() {
+          done();
+        });
+        MockInteractions.pressEnter(button);
+      });
+
+    });
+  </script>
+
+</body>

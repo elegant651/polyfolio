@@ -1,0 +1,27 @@
+<dom-module id="test-button">
+    <style>
+      :host {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        h1.paper-font-display1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  <template>    
+    <paper-button>{{titled}}</paper-button>
+  </template>
+</dom-module>
+  <script>
+  (function() {
+    Polymer({
+      is: 'test-button',    
+
+      properties: {
+        titled: String
+      }
+    });
+    })();
+  </script>

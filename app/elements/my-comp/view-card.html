@@ -1,0 +1,76 @@
+
+<dom-module id="view-card">
+	<style>
+		:host {
+
+		}
+
+		#card {
+			@apply(--layout-vertical);
+			position: relative;
+			float: left;			
+			width: 320px;
+			height: 180px;				
+			background: rgb(255,255,255);			
+			text-align: left;
+			text-decoration: none;
+
+			border: 1px solid rgba(230,230,230,1);
+			border-radius: 5px;
+			box-shadow: 0px 3px 0px 0px rgba(220,220,220,1);			
+		}
+
+		#card:hover {
+			border-color: rgba(205,205,205,1);
+			box-shadow: 0px 3px 0px 0px rgba(205,205,205,1);
+		}
+
+		#card .card_title {
+			position: absolute;
+			top: 50px;
+			left: 30px;
+			font-size: 38px;
+			color: rgba(0,0,0,1);			
+			white-space: normal;
+		}
+	</style>
+	<template>
+		<div id="card" on-tap="{{onCardTapped}}" on-mouseover="{{onCardHovered}}" on-mouseout="{{onCardOuted}}"
+			cardId="{{cardId}}">
+			<div class="card_title">{{card.title}}</div>
+		</div>
+	</template>
+</dom-module>
+<script>
+	Polymer({
+		is: "view-card",
+
+		properties: {			
+			selectedCard: Array,
+			cardWidth: {
+				type: Number,
+				value: 320,
+				observer: 'cardWidthChanged'
+			},
+			cards: Array,
+			card: Array,
+			cardId: Number		
+		},
+
+		cardWidthChanged: function() {
+			Polymer.dom(this.$.card).style.width = this.cardWidth+"px";
+		},
+
+		onCardTapped: function(event) {
+			this.selectedCard = this.cards[parseInt(this.cardId)];
+		},
+
+		onCardHovered: function(event) {
+
+		},
+
+		onCardOuted: function(event) {
+
+		}
+	});
+</script>

@@ -1,0 +1,61 @@
+
+<dom-module id="list-cards">
+	<style>
+		:host {
+
+		}
+
+		.main-panel {
+			@apply(--layout-vertical --layout-center-justified);
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+		}
+
+		.item-list {
+			@apply(--layout-flex --layout-horizontal --layout-around-justified --layout-wrap);
+			position: absolute;				
+			left: 0;
+			right: 0;
+			top: 20px;	
+			width: 100%;								
+			margin-bottom: 40px;
+		}
+
+	</style>
+	<template>
+		<div class="main-panel">
+			<div class="item-list">
+				<template is="dom-repeat" items="{{cards}}">
+					<view-card cardWidth="{{cardWidth}}" card="{{item}}" cardId="{{index}}" selectedCard="{{selectedCard}}"></view-card>
+				</template>
+			</div>
+		</div>
+	</template>
+</dom-module>
+<script>
+	Polymer({
+		is: "list-cards",		
+
+		properties: {
+			selected: {
+				type: Number,
+				value: 0
+			},
+
+			cards: Array,
+			selectedCard: Array
+		},
+
+		ready: function() {
+			this.cards = [
+				{title: "title1"},
+				{title: "title2"},
+				{title: "title3"}
+			];
+		}
+
+
+	});
+</script>

@@ -1,0 +1,36 @@
+<dom-module id="google-map-test">
+	<style>
+		:host{
+
+		}
+
+		google-map {
+			height: 300px;
+		}
+
+		google-streetview-pano {
+			height: 200px;
+		}
+	</style>
+	<template>
+		<google-map latitude="37.77493" longitude="-122.41942"></google-map>
+		<google-streetview-pano
+			  pano-id="CWskcsTEZBNXaD8gG-zATA"
+			  heading="330"
+			  pitch="-2"
+			  zoom="0.8"
+			  >
+		</google-streetview-pano>
+	</template>
+</dom-module>
+	<script>
+	(function() {
+		Polymer({
+			is: 'google-map-test',
+
+			properties: {
+
+			}
+		});
+	})();
+	</script>

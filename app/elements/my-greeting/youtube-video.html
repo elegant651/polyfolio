@@ -1,0 +1,40 @@
+
+<dom-module id="youtube-video">
+    <style>
+      :host {
+        display: block;
+      }
+
+      @media (max-width: 600px) {
+        h1.paper-font-display1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  <template>
+    <h1 class="paper-font-display1"><span>{{greeting}}</span>, <span>{{greeting}}</span>!</h1>
+    <google-youtube
+      video-id="..."
+      height="270px"
+      width="480px"
+      rel="0"
+      start="5"
+      autoplay="1">
+    </google-youtube>
+  </template>
+</dom-module>
+  <script>
+  (function() {
+    Polymer({
+      is: 'youtube-video',
+
+      properties: {
+        greeting: {
+          type: String,
+          value: 'Welcome',
+          notify: true
+        }
+      }
+    });
+    })();
+  </script>
