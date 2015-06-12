@@ -57,8 +57,8 @@
 			cardId: Number		
 		},
 
-		cardWidthChanged: function() {
-			Polymer.dom(this.$.card).style.width = this.cardWidth+"px";
+		cardWidthChanged: function(newValue, oldValue) {			
+			Polymer.dom(this.root).querySelector("#card").style.width = newValue+"px";
 		},
 
 		onCardTapped: function(event) {
