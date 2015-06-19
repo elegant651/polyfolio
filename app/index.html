@@ -111,14 +111,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <!-- <youtube-video></youtube-video> -->
                 <!-- <test-button titled="1234"></test-button> -->
                 <!-- <google-map-test></google-map-test> -->              
-                <!-- <list-cards></list-cards>                 -->
-                <content-page></content-page>
-
-                <p class="paper-font-subhead">You now have:</p>
-                <my-list></my-list>
-
-                <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
+                <list-cards></list-cards>                                
               </paper-material>
+            </section>
+
+            <section data-route="content">
+              <paper-material elevation="1">
+                  <content-page card-id="{{params.name}}"></content-page>          
+              </paper-material>  
             </section>
 
             <section data-route="users">

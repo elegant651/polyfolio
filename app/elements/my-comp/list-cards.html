@@ -28,11 +28,11 @@
 	<template>
 		<div class="main-panel">
 			<div class="item-list">
-				<template is="dom-repeat" items="{{cards}}">
-					<view-card cardWidth="{{cardWidth}}" card="{{item}}" cardId="{{index}}" selectedCard="{{selectedCard}}"></view-card>
+				<template is="dom-repeat" items="{{cards}}">					
+					<view-card cardWidth="{{cardWidth}}" card="{{item}}" card-id="{{index}}" selectedCard="{{selectedCard}}"></view-card>
 				</template>
 			</div>
-		</div>
+		</div>		
 	</template>
 </dom-module>
 <script>

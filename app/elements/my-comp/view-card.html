@@ -35,10 +35,12 @@
 		}
 	</style>
 	<template>
-		<div id="card" on-tap="{{onCardTapped}}" on-mouseover="{{onCardHovered}}" on-mouseout="{{onCardOuted}}"
-			cardId="{{cardId}}">
-			<div class="card_title">{{card.title}}</div>
-		</div>
+		<a href="{{computeContentUrl(cardId)}}">
+			<div id="card" on-tap="{{onCardTapped}}" on-mouseover="{{onCardHovered}}" on-mouseout="{{onCardOuted}}"
+				cardId="{{cardId}}">
+				<div class="card_title">{{card.title}}</div>				
+			</div>
+		</a>
 	</template>
 </dom-module>
 <script>
@@ -59,6 +61,10 @@
 
 		cardWidthChanged: function(newValue, oldValue) {			
 			Polymer.dom(this.root).querySelector("#card").style.width = newValue+"px";
+		},
+
+		computeContentUrl: function(cardId) {
+			return "content/"+cardId;
 		},
 
 		onCardTapped: function(event) {

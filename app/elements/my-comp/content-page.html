@@ -30,8 +30,10 @@
 	</style>
 	<template>
 		<div class="wrapper">
-			<div class="content" on-tap="{{back}}">
-				<paper-icon-button icon="forward"></paper-icon-button>
+			<div class="content">
+				<a href="/">
+					<paper-icon-button icon="forward" on-tap="{{back}}"></paper-icon-button>
+				</a>
 
 				<div class="details">
 					details
@@ -45,7 +47,12 @@
 		is: "content-page",
 
 		properties: {
+			card: Array,
+			cardId: Number
+		},
 
+		back: function() {
+			this.fire('content-back');
 		}
 
 	});
