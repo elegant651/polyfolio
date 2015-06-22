@@ -1,3 +1,4 @@
+
 <!--
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -7,6 +8,7 @@ The complete set of contributors may be found at http://polymer.github.io/CONTRI
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
+
 
 <!doctype html>
 <html>
@@ -20,7 +22,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script src="../../bower_components/test-fixture/test-fixture-mocha.js"></script>
   <link rel="import" href="../../bower_components/test-fixture/test-fixture.html">
 
-  <!-- Step 1: import the element to test -->
+  <!-- Import the element to test -->
+
   <link rel="import" href="../elements/my-greeting/my-greeting.html">
 
 </head>
@@ -41,9 +44,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         greeting = fixture('basic');
       });
 
-      test('Welcome, Welcome!', function() {
+
+      test('Welcome!', function() {
         header = greeting.querySelector('h1');
-        assert.equal(header.textContent, 'Welcome, Welcome!');
+        assert.equal(header.textContent, 'Welcome!');
       });
 
     });
