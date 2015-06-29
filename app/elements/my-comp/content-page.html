@@ -32,7 +32,7 @@
 		<div class="wrapper">
 			<div class="content">
 				<a href="/">
-					<paper-icon-button icon="forward" on-tap="{{back}}"></paper-icon-button>
+					<paper-icon-button icon="forward"></paper-icon-button>
 				</a>
 
 				<div class="details">
@@ -49,11 +49,8 @@
 		properties: {
 			card: Array,
 			cardId: Number
-		},
-
-		back: function() {
-			this.fire('content-back');
 		}
+		
 
 	});
 </script>
