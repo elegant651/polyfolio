@@ -23,11 +23,12 @@
 		}
 
 		.bottomBtns {
-			@apply(--layout-horizontal --layout-justified);
+			@apply(--layout-horizontal --layout-justified);			
+			margin: 0 auto;
 		}
 	</style>
 	<template>
-		<neon-animated-pages id="nap" selected="0" entry-animation="slide-from-right-animation">
+		<neon-animated-pages id="nap" selected="0" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
 			<!-- <template is="dom-repeat" items="{{intros}}"> -->
 				<neon-animatable>
 					<div class="pageWrapper">
@@ -48,7 +49,7 @@
 		</neon-animated-pages>
 		<div class="bottomBtns">
 			<paper-icon-button id="btnPrev" icon="arrow-back" on-tap="onPrev"></paper-icon-button>
-
+			<page-indicator num-size="{{numSize}}" cur-idx="{{curIdx}}"></page-indicator>
 			<paper-icon-button id="btnNext" icon="arrow-forward" on-tap="onNext"></paper-icon-button>
 		</div>
 	</template>
@@ -58,11 +59,21 @@
 		is: "info-swipeview",
 
 		properties: {
-
+			numSize: {
+				type: Number,
+				value: 1
+			},
+			curIdx: {
+				type: Number, 
+				value: 0
+			}
 		},
 
 		onPrev: function() {
-			var nap = Polymer.dom(this.root).querySelector("#nap");
+			var nap = this.$.nap;
+			nap.setAttribute("entry-animation", "slide-from-left-animation");
+			nap.setAttribute("exit-animation", "slide-right-animation");
+
 			var childrenSize = nap.children.length;
 			if(nap.selected == 0){
 				return;
@@ -71,21 +82,24 @@
 			nap.selected = (nap.selected - 1) % childrenSize;
 			this.curIdx = nap.selected;
 
-			var btnPrev = Polymer.dom(this.root).querySelector("#btnPrev");
+			var btnPrev = this.$.btnPrev;
 			if(nap.selected == 0){
 				btnPrev.style.visibility = "hidden";
 			}								
 		}, 
 
 		onNext: function() {						
-			var nap = Polymer.dom(this.root).querySelector("#nap");
+			var nap = this.$.nap;
+			nap.setAttribute("entry-animation", "slide-from-right-animation");
+			nap.setAttribute("exit-animation", "slide-left-animation");
+
 			var childrenSize = nap.children.length;									
 			if(nap.selected+1 == this.numSize) {	
 				this.fire('finish-next');							
 				return;
 			}
 			
-			var btnPrev = Polymer.dom(this.root).querySelector("#btnPrev");
+			var btnPrev = this.$.btnPrev;
 			btnPrev.style.visibility = "visible";
 
 			nap.selected = (nap.selected + 1) % childrenSize;			
