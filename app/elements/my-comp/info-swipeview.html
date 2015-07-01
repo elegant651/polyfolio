@@ -19,11 +19,13 @@
 		}
 
 		.pageWrapper {
-			@apply(--layout-vertical --layout-center-justified);			
+			@apply(--layout-vertical);			
+			@apply(--layout-center-justified);
 		}
 
 		.bottomBtns {
-			@apply(--layout-horizontal --layout-justified);			
+			@apply(--layout-horizontal);
+			@apply(--layout-justified);			
 			margin: 0 auto;
 		}
 	</style>
@@ -61,7 +63,7 @@
 		properties: {
 			numSize: {
 				type: Number,
-				value: 1
+				value: 3
 			},
 			curIdx: {
 				type: Number, 
