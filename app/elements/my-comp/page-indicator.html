@@ -5,13 +5,17 @@
 
 		}
 
+		.wrapper {
+			@apply(--layout-horizontal);
+		}
+
 		.circle {
 			width: 8px;
 			height: 8px;
 			-webkit-border-radius: 4px;
 			-moz-border-radius: 4px;
 			border-radius: 4px;
-			background: rgba(230,230,230,1);
+			background: rgba(230,230,230,1);			
 			margin-right: 12px;
 		}
 
@@ -26,45 +30,55 @@
 		}
 	</style>
 	<template>
-		<template is="dom-repeat" items="{{colIndicates}}">			
-			<template is="dom-if" if="{{item.isCur}}">				
-				<div class="circle current"></div>
-			</template>
-			<template is="dom-if" if="{{!item.isCur}}">
-				<div class="circle"></div>
-			</template>
-		</template>
+		<div id="wrapper" class="wrapper">
+								
+		</div>
 	</template>
 </dom-module>
 <script>
 	Polymer({
 		is: "page-indicator",
 
-		properties: {
-			colIndicates: Array,
+		properties: {			
 			curIdx: {
 				type: Number,
 				value: 0,
-				observer: "initIndicators"
+				observer: 'initIndicators'
 			},
 			numSize: {
 				type: Number,
 				value: 1,
-				observer: "initIndicators"
+				observer: 'initIndicators'
 			}
 		},
 
 		ready: function() {
 			this.initIndicators();
-		},
+		},		
 
 		initIndicators: function() {
-			this.colIndicates = new Array(this.numSize);
-			for(var i=0; i < this.colIndicates.length; i++){
-				var isCur = false;
-				if(i==this.curIdx) isCur = true;
-				this.colIndicates[i] = {"idx": i, "isCur": isCur};
+			// this.colIndicates = new Array(this.numSize);
+
+			Polymer.dom(this.$.wrapper).innerHTML = "";
+			var strHTML = "";
+			for(var i=0; i < this.numSize; i++) {				
+				if(i==this.curIdx){
+					strHTML = "<div class='circle current'></div>";
+				} else {
+					strHTML = "<div class='circle'></div>";
+				}
+				var elem = document.createElement("div");
+				elem.innerHTML = strHTML;
+				Polymer.dom(this.$.wrapper).appendChild(elem);
 			}
+			console.log(strHTML);
+
+			//strHTML;
+			// for(var i=0; i < this.colIndicates.length; i++){				
+			// 	var isCur = false;
+			// 	if(i==this.curIdx) isCur = true;
+			// 	this.colIndicates[i] = {"idx": i, "isCur": isCur};
+			// }
 
 			console.log(this.numSize + "/" + this.curIdx);
 		}

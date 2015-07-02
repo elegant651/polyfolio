@@ -71,6 +71,10 @@
 			}
 		},
 
+		ready: function() {
+			this.$.btnPrev.style.visibility = "hidden";
+		},
+
 		onPrev: function() {
 			var nap = this.$.nap;
 			nap.setAttribute("entry-animation", "slide-from-left-animation");
@@ -83,10 +87,9 @@
 
 			nap.selected = (nap.selected - 1) % childrenSize;
 			this.curIdx = nap.selected;
-
-			var btnPrev = this.$.btnPrev;
+			
 			if(nap.selected == 0){
-				btnPrev.style.visibility = "hidden";
+				this.$.btnPrev.style.visibility = "hidden";
 			}								
 		}, 
 
@@ -100,9 +103,8 @@
 				this.fire('finish-next');							
 				return;
 			}
-			
-			var btnPrev = this.$.btnPrev;
-			btnPrev.style.visibility = "visible";
+						
+			this.$.btnPrev.style.visibility = "visible";
 
 			nap.selected = (nap.selected + 1) % childrenSize;			
 			this.curIdx = nap.selected;
