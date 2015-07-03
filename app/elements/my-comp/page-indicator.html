@@ -56,8 +56,7 @@
 			this.initIndicators();
 		},		
 
-		initIndicators: function() {
-			// this.colIndicates = new Array(this.numSize);
+		initIndicators: function() {			
 
 			Polymer.dom(this.$.wrapper).innerHTML = "";
 			var strHTML = "";
@@ -70,15 +69,7 @@
 				var elem = document.createElement("div");
 				elem.innerHTML = strHTML;
 				Polymer.dom(this.$.wrapper).appendChild(elem);
-			}
-			console.log(strHTML);
-
-			//strHTML;
-			// for(var i=0; i < this.colIndicates.length; i++){				
-			// 	var isCur = false;
-			// 	if(i==this.curIdx) isCur = true;
-			// 	this.colIndicates[i] = {"idx": i, "isCur": isCur};
-			// }
+			}			
 
 			console.log(this.numSize + "/" + this.curIdx);
 		}
