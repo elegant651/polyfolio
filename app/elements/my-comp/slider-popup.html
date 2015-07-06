@@ -11,41 +11,12 @@
 			top: 100px;			
 			z-index: 25000;			
 		}
-
-		.mainPanel {
-			@apply(--layout-vertical);
-			position: absolute;			
-			right: -520px;
-			top: 48px;
-			width: 520px;
-			height: 600px;			
-			background-color: #fff;
-			border: 1px solid rgba(220,220,220,1);
-			box-shadow: -5px 0px 5px 0px rgba(0,0,0,0.3);
-			z-index: 20100;
-			min-height: 592px;
-		}
-
-		.panelBtns {
-			@apply(--layout-horizontal);
-			@apply(--layout-center-jusitifed);
-
-			position: absolute;
-			bottom: 20px;
-			left: 50%;
-
-			margin-left: -256px;
-		}		
+		
 
 	</style>
 	<template>
 		<paper-icon-button id="btnToggle" icon="arrow-back" on-tap="onToggle"></paper-icon-button>
-		<div class="mainPanel">
-			<iron-image></iron-image>
-			<div class="panelBtns">
-				<paper-icon-button id="btnShare" icon="arrow-forward" on-tap="onShare"></paper-icon-button>
-			</div>
-		</div>
+		<slider-animatable>slider-animatable</slider-animatable>
 	</template>
 </dom-module>
 <script>
@@ -57,12 +28,16 @@
 		},
 
 		onToggle: function() {
-			
-		},
-
-		onShare: function() {
-
-		}
+			var panel = document.querySelector('slider-animatable');
+			console.log(panel);
+			if(panel) {
+				if(panel.opened) {
+					panel.hide();
+				} else {
+					panel.show();
+				}
+			}
+		}		
 
 	});
 </script>
