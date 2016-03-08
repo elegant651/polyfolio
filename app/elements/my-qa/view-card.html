@@ -1,0 +1,212 @@
+
+<dom-module id="view-card">
+	<style>
+		:host {
+
+		}
+
+		#card {
+			@apply(--layout-vertical);
+			position: relative;			
+			max-width: 200px;
+			height: 200px;				
+			margin: 10px;
+			background: rgb(255,255,255);			
+			text-align: left;
+			text-decoration: none;
+			color: #fff;
+
+			border: 1px solid rgba(230,230,230,1);
+			border-radius: 5px;
+			box-shadow: 0px 3px 0px 0px rgba(220,220,220,1);			
+		}
+
+		/*#card:hover {
+			border-color: rgba(205,205,205,1);
+			box-shadow: 0px 3px 0px 0px rgba(205,205,205,1);
+		}*/
+
+		#card .overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.35);
+			cursor: pointer;
+		}
+
+		#card .albumPicture {
+			width: 100%;
+			height: 100%;			
+		}
+
+		#card .rankContainer {
+			position: absolute;
+			width: 30px;
+			top: 10px;
+			left: 10px;
+			text-align: center;
+		}
+
+		#card .rankContainer .rank {
+			font-size: 45px;
+			font-weight: bold;
+		}
+
+		#card .rankContainer .icon {
+			font-size: 13px;
+			margin-top: -12px;			
+		}
+		#card .rankContainer .changed {
+			font-size: 13px;		
+			margin-top: -5px;	
+		}
+
+		#card .descArea {
+			position: absolute;
+			top: 100px;
+			left: 10px;
+			font-size: 16px;			
+			white-space: normal;			
+		}
+
+		#card .descArea a {
+			color: #fff;
+		}
+
+		#card .descArea a:hover {
+			color: rgb(210, 210, 210);
+		}
+
+		#card .descArea .track_name {
+			font-size: 25px;
+			font-weight: bold;
+			margin-left: -2px;
+		}	
+
+		#card .menuBtns {
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+		}
+		#card .menuBtns .playBtn {		  
+			float: right;	
+		  	width: 21px;
+		  	height: 21px;		  
+		  	margin-top: 5px;
+		  	margin-left: 5px;
+		  	cursor: pointer;
+		}
+		#card .menuBtns .itunes {
+		  background-image: url(../../images/icon_itunes_focused.png);
+		  background-repeat: no-repeat;
+		}		
+		#card .menuBtns .itunes:hover {
+		  /*background-image: url(../../images/icon_itunes_unfocused.png);*/
+		  opacity: .6;
+		}
+		#card .menuBtns .youtube {
+		  background-image: url(../../images/icon_Youtube_focused.png);
+		  background-repeat: no-repeat;
+		}
+		#card .menuBtns .youtube:hover {
+		  /*background-image: url(../../images/icon_Youtube_unfocused.png);*/
+		  opacity: .6;
+		}			
+	</style>
+	<template>		
+		<div id="card" on-tap="{{onCardTapped}}" on-mouseover="{{onCardHovered}}" on-mouseout="{{onCardOuted}}" cardId="{{cardId}}">				
+			<img class="albumPicture" src="[[card.artwork_url]]"></img>
+
+			<div class="overlay"></div>
+
+			<div class="rankContainer">
+               <div class="rank">[[card.current_rank]]</div>
+               <div class="icon">▲</div>
+               <div class="changed">[[card.past_rank]]</div>
+            </div>
+
+			<div class="descArea">
+				<a href="{{_computeTrackUrl(card.track_id)}}"><div class="track_name">[[_computeShortenStr(card.track_name, 9)]]</div></a>				
+				<a href="{{_computeArtistUrl(card.artist_id)}}"><div class="artist_name">{{card.artist_name}}</div></a>
+				<div class="album_name">[[_computeShortenStr(card.album_name, 11)]]</div>
+			</div>
+
+			<div class="menuBtns">
+                <div class="youtube playBtn" data-youtube-url$="{{card.youtube_url}}" on-tap="showYoutubeDlog"></div>
+                <div class="itunes playBtn" data-preview-url$="{{card.preview_url}}" on-tap="moveItunesUrl"></div>
+            </div>
+		</div>		
+	</template>
+</dom-module>
+<script>
+	Polymer({
+		is: "view-card",
+
+		properties: {			
+			selectedCard: Array,
+			cardWidth: {
+				type: Number,
+				value: 320,
+				observer: 'cardWidthChanged'
+			},
+			cards: Array,
+			card: Array,
+			cardId: Number,
+			youtubeurl: {
+				type: String,				
+				notify: true
+			},
+        	itunesurl: {
+				type: String,				
+				notify: true
+			},
+			dataidx: {
+				type: Number,
+				notify: true
+			}
+		},
+
+		cardWidthChanged: function(newValue, oldValue) {			
+			Polymer.dom(this.root).querySelector("#card").style.width = newValue+"px";
+		},
+		
+		_computeTrackUrl: function(track_id){
+	        return "/track?"+track_id;
+	    },
+	    _computeArtistUrl: function(artist_id){        
+	        return "/artist?"+artist_id[0];
+	    },
+
+		_computeShortenStr: function(str, size) {
+        	if(str.length > size){
+        		return str.substring(0,size)+"...";
+        	}
+        	return str;
+        },
+
+		onCardTapped: function(event) {
+			this.selectedCard = this.cards[parseInt(this.cardId)];
+		},
+
+		onCardHovered: function(event) {
+
+		},
+
+		onCardOuted: function(event) {
+
+		},
+
+		showYoutubeDlog: function(e) {
+			var youtubeUrl = e.currentTarget.getAttribute("data-youtube-url");
+			this.youtubeurl = youtubeUrl;			
+		},
+
+		moveItunesUrl: function(e) {
+			var itunesUrl = e.currentTarget.getAttribute("data-preview-url");
+			this.itunesurl = itunesUrl;
+			this.dataidx = this.cardId;
+		}
+	});
+</script>
