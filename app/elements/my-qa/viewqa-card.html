@@ -1,5 +1,5 @@
 
-<dom-module id="view-card">
+<dom-module id="viewqa-card">
 	<style>
 		:host {
 
@@ -97,29 +97,13 @@
 		  	margin-top: 5px;
 		  	margin-left: 5px;
 		  	cursor: pointer;
-		}
-		#card .menuBtns .itunes {
-		  background-image: url(../../images/icon_itunes_focused.png);
-		  background-repeat: no-repeat;
-		}		
-		#card .menuBtns .itunes:hover {
-		  /*background-image: url(../../images/icon_itunes_unfocused.png);*/
-		  opacity: .6;
-		}
-		#card .menuBtns .youtube {
-		  background-image: url(../../images/icon_Youtube_focused.png);
-		  background-repeat: no-repeat;
-		}
-		#card .menuBtns .youtube:hover {
-		  /*background-image: url(../../images/icon_Youtube_unfocused.png);*/
-		  opacity: .6;
-		}			
+		}				
 	</style>
 	<template>		
 		<div id="card" on-tap="{{onCardTapped}}" on-mouseover="{{onCardHovered}}" on-mouseout="{{onCardOuted}}" cardId="{{cardId}}">				
-			<img class="albumPicture" src="[[card.artwork_url]]"></img>
+			<!-- <img class="albumPicture" src="[[card.artwork_url]]"></img> -->
 
-			<div class="overlay"></div>
+			<!-- <div class="overlay"></div> -->
 
 			<div class="rankContainer">
                <div class="rank">[[card.current_rank]]</div>
@@ -128,21 +112,21 @@
             </div>
 
 			<div class="descArea">
-				<a href="{{_computeTrackUrl(card.track_id)}}"><div class="track_name">[[_computeShortenStr(card.track_name, 9)]]</div></a>				
-				<a href="{{_computeArtistUrl(card.artist_id)}}"><div class="artist_name">{{card.artist_name}}</div></a>
-				<div class="album_name">[[_computeShortenStr(card.album_name, 11)]]</div>
+				<a href="{{_computeTrackUrl(card.track_id)}}"><div class="track_name">[[_computeShortenStr(card.title, 9)]]</div></a>				
+				<a href="{{_computeArtistUrl(card.artist_id)}}"><div class="artist_name">{{card.username}}</div></a>
+				<!-- <div class="album_name">[[_computeShortenStr(card.album_name, 11)]]</div> -->
 			</div>
 
 			<div class="menuBtns">
-                <div class="youtube playBtn" data-youtube-url$="{{card.youtube_url}}" on-tap="showYoutubeDlog"></div>
-                <div class="itunes playBtn" data-preview-url$="{{card.preview_url}}" on-tap="moveItunesUrl"></div>
+                <div class="playBtn" data-youtube-url$="{{card.youtube_url}}" on-tap="btnTap0"></div>
+                <div class="playBtn" data-preview-url$="{{card.preview_url}}" on-tap="btnTap1"></div>
             </div>
 		</div>		
 	</template>
 </dom-module>
 <script>
 	Polymer({
-		is: "view-card",
+		is: "viewqa-card",
 
 		properties: {			
 			selectedCard: Array,
@@ -153,15 +137,7 @@
 			},
 			cards: Array,
 			card: Array,
-			cardId: Number,
-			youtubeurl: {
-				type: String,				
-				notify: true
-			},
-        	itunesurl: {
-				type: String,				
-				notify: true
-			},
+			cardId: Number,			
 			dataidx: {
 				type: Number,
 				notify: true
@@ -196,17 +172,6 @@
 
 		onCardOuted: function(event) {
 
-		},
-
-		showYoutubeDlog: function(e) {
-			var youtubeUrl = e.currentTarget.getAttribute("data-youtube-url");
-			this.youtubeurl = youtubeUrl;			
-		},
-
-		moveItunesUrl: function(e) {
-			var itunesUrl = e.currentTarget.getAttribute("data-preview-url");
-			this.itunesurl = itunesUrl;
-			this.dataidx = this.cardId;
-		}
+		}		
 	});
 </script>

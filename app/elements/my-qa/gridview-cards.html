@@ -21,17 +21,17 @@
 			width: 100%;										
 			margin-bottom: 40px;		
 			overflow: hidden;	
-		}
+		}		
 
 
 	</style>
 	<template>
-		<div class="gridview-panel">
+		<div class="gridview-panel">			
 			<div class="item-list">
-				<template is="dom-repeat" items="{{data.rank}}">							
-					<view-card class="viewcard" cardWidth="{{cardWidth}}" card="{{item}}" card-id="{{index}}"  selected-card="{{selectedCard}}" youtubeurl="{{youtubeurl}}" itunesurl="{{itunesurl}}" dataidx="{{dataidx}}"></view-card>
+				<template is="dom-repeat" items="{{data.rank}}">									
+					<viewqa-card class="viewcard" card="{{item}}" card-id="{{index}}" selected-card="{{selectedCard}}" dataidx="{{dataidx}}"></viewqa-card>
 				</template>
-			</div>
+			</div>			
 		</div>		
 	</template>
 </dom-module>
@@ -53,15 +53,7 @@
 				type: Array,
 				observer: "_dataChanged"
 			},
-			selectedCard: Array,
-			youtubeurl: {
-				type: String,				
-				notify: true
-			},
-        	itunesurl: {
-				type: String,				
-				notify: true
-			},
+			selectedCard: Array,			
 			dataidx: {
 				type: Number,
 				notify: true
@@ -83,6 +75,16 @@
 		          	}
 	        	}
 	      	}
+		},
+
+		ready: function() {
+			this.data = {
+				rank: [
+					{current_rank: 0, past_rank: 1, title: "TESTTEST", username: "TESTER"},
+					{current_rank: 0, past_rank: 1, title: "TESTTEST", username: "TESTER"},
+					{current_rank: 0, past_rank: 1, title: "TESTTEST", username: "TESTER"}
+				]				
+			};
 		},
 
 		_dataChanged: function() {			
